@@ -20,6 +20,12 @@
     component: './Rich',
   },
   {
+    path: '/file',
+    name: 'file',
+    icon: 'smile',
+    component: './Files',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
