@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import mockjs from 'mockjs';
 
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
@@ -200,4 +201,11 @@ export default {
   },
 
   'GET  /api/login/captcha': getFakeCaptcha,
+
+  'GET /api/mock/data': mockjs.mock({
+    'list|123': [{ name: '@city', 'value|1-100': 50, 'type|0-2': 1 }],
+  }),
+  'GET /api/mock/user': mockjs.mock({
+    'list|1-2': [{ address: '@city', 'value|1-100': 50, 'type|0-2': 1, 'name|5-8': 'hello' }],
+  }),
 };

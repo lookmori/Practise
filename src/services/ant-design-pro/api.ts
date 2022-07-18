@@ -83,3 +83,19 @@ export async function removeRule(options?: { [key: string]: any }) {
     ...(options || {}),
   });
 }
+
+// mock 数据
+
+export async function Tmock(options?: { [key: string]: any }) {
+  return request('/api/mock/data', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
+export async function Tdata(options?: { [key: string]: any }) {
+  return request('/api/mock/user', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
