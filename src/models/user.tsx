@@ -1,25 +1,27 @@
-import Tdata from '../../mock/user';
+import { Tmock } from '@/services/ant-design-pro/api';
 export default {
   namespace: 'user',
-  state: 0,
+  state: {
+    users: [],
+    count: 0,
+  },
   effects: {
-    *getUser({ payload }, { call, put }) {
-      const list = yield call(Tdata);
-      console.log(list, 'list');
+    *getUser({ payload }, { call, put, select }) {
+      const { list } = yield call(Tmock);
+      let a = yield select((state) => state.user.count);
+      console.log(a, 'a value');
 
-      yield put({ type: 'logData' });
-      yield put({ tyep: 'add' });
+      yield put({ type: 'logData', payload: { list } });
     },
   },
   reducers: {
-    logData(state, { payload }) {
+    logData(state, action) {
+      console.log(action, 'actions');
+
       return {
         ...state,
-        user: 'world',
+        users: [...action.payload.list],
       };
-    },
-    add(state) {
-      return state + 1;
     },
   },
 };

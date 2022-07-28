@@ -99,3 +99,10 @@ export async function Tdata(options?: { [key: string]: any }) {
     ...(options || {}),
   });
 }
+
+export async function fetchMenuData(options?: { [key: string]: any }) {
+  return request('api/menuDataRoute', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}

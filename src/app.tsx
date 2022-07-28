@@ -6,7 +6,7 @@ import { PageLoading, SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
 import defaultSettings from '../config/defaultSettings';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import { currentUser as queryCurrentUser, fetchMenuData } from './services/ant-design-pro/api';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -56,6 +56,27 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     disableContentMargin: false,
     waterMarkProps: {
       content: initialState?.currentUser?.name,
+    },
+    menu: {
+      // 每当 initialState?.currentUser?.userid 发生修改时重新执行 request
+      params: {
+        userId: initialState?.currentUser?.userid,
+      },
+      request: async (params, defaultMenuData) => {
+        // initialState.currentUser 中包含了所有用户信息
+        // const menuData = await fetchMenuData();
+        const a = [
+          {
+            name: '你好',
+            icon: 'table',
+            path: '/list',
+            component: './TableList',
+          },
+        ];
+        console.log(a, 'men');
+
+        return a;
+      },
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
