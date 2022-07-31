@@ -8,8 +8,6 @@ export default {
   effects: {
     *getUser({ payload }, { call, put, select }) {
       const { list } = yield call(Tmock);
-      let a = yield select((state) => state.user.count);
-      console.log(a, 'a value');
 
       yield put({ type: 'logData', payload: { list } });
     },

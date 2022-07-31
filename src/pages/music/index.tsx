@@ -1,40 +1,45 @@
-import { removeRule, rule, Tmock } from '@/services/ant-design-pro/api';
+import music from '@/models/music';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { FooterToolbar, PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Input, message } from 'antd';
-import user from 'mock/user';
-import React, { useEffect, useRef, useState } from 'react';
-import { connect, FormattedMessage, useIntl } from 'umi';
-
-const TableList: React.FC = connect(({ user }: any) => ({ user }))(function (props: any) {
-  const { dispatch } = props;
-  console.log(props, 'pros');
-
+import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { Button } from 'antd';
+import React, { useEffect } from 'react';
+import { connect } from 'umi';
+const TableList: React.FC = connect(({ music }) => ({ music }))(function ({
+  dispatch,
+  music: { list },
+}: any) {
+  useEffect(() => {
+    dispatch({
+      type: 'music/getMusicList',
+      payload: {},
+    });
+  }, []);
   const columns: ProColumns<API.RuleListItem>[] = [
     {
       title: '地区',
       dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: '值',
-      dataIndex: 'value',
+      title: '作者',
+      dataIndex: 'author',
+      key: 'author',
     },
     {
-      title: '其他',
-      dataIndex: 'type',
-      sorter: true,
-      hideInForm: true,
+      title: '日期',
+      dataIndex: 'date',
+      key: 'date',
     },
   ];
 
   return (
     <PageContainer>
-      <ProTable<API.RuleListItem, API.PageParams>
-        rowKey="key"
+      <ProTable
         search={{
           labelWidth: 120,
         }}
+        options={false}
         toolBarRender={() => [
           <Button
             type="primary"
@@ -49,7 +54,7 @@ const TableList: React.FC = connect(({ user }: any) => ({ user }))(function (pro
             <PlusOutlined /> 添加
           </Button>,
         ]}
-        dataSource={props.user.users}
+        dataSource={list}
         columns={columns}
       />
     </PageContainer>

@@ -14,43 +14,14 @@
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
+    path: '/music',
+    name: '音乐',
     icon: 'smile',
-    component: './Rich',
-  },
-  {
-    path: '/file',
-    name: 'file',
-    icon: 'smile',
-    component: './Files',
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        icon: 'smile',
-        component: './Welcome',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    component: './music',
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/music',
   },
   {
     component: './404',

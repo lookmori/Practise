@@ -57,27 +57,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     waterMarkProps: {
       content: initialState?.currentUser?.name,
     },
-    menu: {
-      // 每当 initialState?.currentUser?.userid 发生修改时重新执行 request
-      params: {
-        userId: initialState?.currentUser?.userid,
-      },
-      request: async (params, defaultMenuData) => {
-        // initialState.currentUser 中包含了所有用户信息
-        // const menuData = await fetchMenuData();
-        const a = [
-          {
-            name: '你好',
-            icon: 'table',
-            path: '/list',
-            component: './TableList',
-          },
-        ];
-        console.log(a, 'men');
-
-        return a;
-      },
-    },
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
