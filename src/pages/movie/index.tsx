@@ -1,4 +1,4 @@
-import music from '@/models/music';
+import movie from '@/models/movie';
 import { saveMusic } from '@/services/music';
 import { PlusOutlined } from '@ant-design/icons';
 import {
@@ -12,9 +12,9 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, message } from 'antd';
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
-const TableList: React.FC = connect(({ music }) => ({ music }))(function ({
+const TableList: React.FC = connect(({ movie }) => ({ movie }))(function ({
   dispatch,
-  music: { list },
+  movie: { list },
 }: any) {
   useEffect(() => {
     dispatch({

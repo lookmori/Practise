@@ -20,6 +20,12 @@
     component: './music',
   },
   {
+    path: '/movie',
+    name: '电影',
+    icon: 'smile',
+    component: './movie',
+  },
+  {
     path: '/',
     redirect: '/music',
   },

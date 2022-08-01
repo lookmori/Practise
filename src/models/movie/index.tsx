@@ -1,7 +1,7 @@
 import { deleteMusic, findMusic, getMusicAll, saveMusic } from '@/services/music';
 
 export default {
-  namespace: 'music',
+  namespace: 'movie',
   state: {
     list: [],
   },

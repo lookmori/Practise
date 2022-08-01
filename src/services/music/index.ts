@@ -5,3 +5,22 @@ export function getMusicAll() {
     method: 'GET',
   });
 }
+
+export function findMusic(data: string) {
+  return request(`${BASEURL}/music/find?params=${data}`, {
+    method: 'GET',
+  });
+}
+
+export function saveMusic(data: any) {
+  return request(`${BASEURL}/music/save`, {
+    method: 'POST',
+    data,
+  });
+}
+
+export function deleteMusic(id: number) {
+  return request(`${BASEURL}/music/delete?id=${id}`, {
+    method: 'DELETE',
+  });
+}
