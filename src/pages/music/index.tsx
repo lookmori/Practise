@@ -49,7 +49,7 @@ const TableList: React.FC = connect(({ music }) => ({ music }))(function ({
           onClick={() => {
             deleteMusic(record.id);
           }}
-          style={{ color: 'red' }}
+          style={{ color: 'red', marginRight: 10 }}
         >
           删除
         </a>,
