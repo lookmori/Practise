@@ -1,18 +1,10 @@
-import music from '@/models/music';
-import { saveMusic } from '@/services/music';
 import { PlusOutlined } from '@ant-design/icons';
-import {
-  ActionType,
-  ModalForm,
-  ProColumns,
-  ProFormDatePicker,
-  ProFormText,
-} from '@ant-design/pro-components';
+import { ModalForm, ProColumns, ProFormDatePicker, ProFormText } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, message } from 'antd';
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
-const TableList: React.FC = connect(({ music }) => ({ music }))(function ({
+const TableList: React.FC = connect(({ music }: any) => ({ music }))(function ({
   dispatch,
   music: { list },
 }: any) {

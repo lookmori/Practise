@@ -1,40 +1,32 @@
-import movie from '@/models/movie';
-import { saveMusic } from '@/services/music';
 import { PlusOutlined } from '@ant-design/icons';
-import {
-  ActionType,
-  ModalForm,
-  ProColumns,
-  ProFormDatePicker,
-  ProFormText,
-} from '@ant-design/pro-components';
+import { ModalForm, ProColumns, ProFormDatePicker, ProFormText } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, message } from 'antd';
+import { Button } from 'antd';
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
-const TableList: React.FC = connect(({ movie }) => ({ movie }))(function ({
+const TableList: React.FC = connect(({ movie }: any) => ({ movie }))(function ({
   dispatch,
-  movie: { list },
+  movie: { movie },
 }: any) {
   useEffect(() => {
     dispatch({
-      type: 'music/getMusicList',
+      type: 'movie/getMusicList',
       payload: {},
     });
   }, []);
   const columns: ProColumns<API.RuleListItem>[] = [
     {
-      title: '歌名',
+      title: '电影名',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '作者',
+      title: '导演',
       dataIndex: 'author',
       key: 'author',
     },
     {
-      title: '日期',
+      title: '发布日期',
       dataIndex: 'date',
       key: 'date',
     },
@@ -83,11 +75,11 @@ const TableList: React.FC = connect(({ movie }) => ({ movie }))(function ({
             musicAuthor: string;
             musicPublishDate: Date;
           }>
-            title="新增音乐"
+            title="新增电影"
             trigger={
               <Button type="primary">
                 <PlusOutlined />
-                新增音乐
+                新增电影
               </Button>
             }
             autoFocusFirstInput
@@ -100,12 +92,12 @@ const TableList: React.FC = connect(({ movie }) => ({ movie }))(function ({
               return true;
             }}
           >
-            <ProFormText width="md" name="musicName" label="歌曲名称" />
-            <ProFormText width="md" name="musicAuthor" label="歌曲作者" />
-            <ProFormDatePicker width="md" name="musicPublishDate" label="歌曲发行时间" />
+            <ProFormText width="md" name="movieName" label="歌曲名称" />
+            <ProFormText width="md" name="movieAuthor" label="歌曲作者" />
+            <ProFormDatePicker width="md" name="moviePublishDate" label="歌曲发行时间" />
           </ModalForm>,
         ]}
-        dataSource={list}
+        dataSource={movie}
         columns={columns}
       />
     </PageContainer>

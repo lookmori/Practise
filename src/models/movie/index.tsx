@@ -1,27 +1,13 @@
-import { deleteMusic, findMusic, getMusicAll, saveMusic } from '@/services/music';
+import { getMovieAll } from '@/services/movie';
 
 export default {
   namespace: 'movie',
   state: {
-    list: [],
+    movie: [],
   },
   effects: {
     *getMusicList({ payload }: any, { call, put }: any): any {
-      const { data } = yield call(getMusicAll, { payload });
-      yield put({ type: 'save', payload: { data } });
-    },
-    *findMusicOne({ payload }: any, { call, put }: any): any {
-      const { data } = yield call(findMusic, { payload });
-      yield put({ type: 'save', payload: { data } });
-    },
-    *saveMusic({ payload }: any, { call, put }: any): any {
-      const { data } = yield call(saveMusic, payload);
-      yield put({ type: 'save', payload: { data } });
-    },
-    *deleteMusic({ payload }: any, { call, put }: any): any {
-      console.log(payload, 'payload');
-
-      const { data } = yield call(deleteMusic, payload);
+      const { data } = yield call(getMovieAll, { payload });
       yield put({ type: 'save', payload: { data } });
     },
   },
