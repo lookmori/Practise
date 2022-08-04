@@ -37,6 +37,7 @@ const TableList: React.FC = connect(({ music }) => ({ music }))(function ({
       title: '日期',
       dataIndex: 'date',
       key: 'date',
+      render: (_: any, record: any) => [<>{record.date.substring(0, 10)}</>],
     },
     {
       title: '操作',
@@ -52,17 +53,52 @@ const TableList: React.FC = connect(({ music }) => ({ music }))(function ({
         >
           删除
         </a>,
+        <ModalForm<{
+          musicName: string;
+          musicAuthor: string;
+          musicPublishDate: Date;
+        }>
+          title="新增音乐"
+          trigger={<a href="#">编辑</a>}
+          autoFocusFirstInput
+          modalProps={{
+            onCancel: () => console.log('run'),
+          }}
+          submitTimeout={2000}
+          onFinish={async (values) => {
+            addAndUpdateMusic(values, 2);
+            return true;
+          }}
+        >
+          <ProFormText width="md" name="musicName" initialValue={record.name} label="歌曲名称" />
+          <ProFormText
+            width="md"
+            name="musicAuthor"
+            initialValue={record.author}
+            label="歌曲作者"
+          />
+          <ProFormDatePicker
+            width="md"
+            name="musicPublishDate"
+            initialValue={record.date}
+            label="歌曲发行时间"
+          />
+        </ModalForm>,
       ],
     },
   ];
 
-  const addMusic = async (values: any) => {
+  const addAndUpdateMusic = async (values: any, type: number) => {
     const body = {
       name: values.musicName,
       author: values.musicAuthor,
       date: values.musicPublishDate,
     };
-    dispatch({ type: 'music/saveMusic', payload: body });
+    console.log(body, 'body');
+
+    type == 1
+      ? dispatch({ type: 'music/saveMusic', payload: body })
+      : dispatch({ type: 'music/updateMusic', payload: body });
   };
 
   const deleteMusic = async (id: string) => {
@@ -96,7 +132,7 @@ const TableList: React.FC = connect(({ music }) => ({ music }))(function ({
             }}
             submitTimeout={2000}
             onFinish={async (values) => {
-              addMusic(values);
+              addAndUpdateMusic(values, 1);
               return true;
             }}
           >

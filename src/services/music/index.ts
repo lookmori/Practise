@@ -24,3 +24,9 @@ export function deleteMusic(id: number) {
     method: 'DELETE',
   });
 }
+export function updateMusic(data: any) {
+  return request(`${BASEURL}/music/update`, {
+    method: 'POST',
+    data,
+  });
+}

@@ -1,4 +1,4 @@
-import { deleteMusic, findMusic, getMusicAll, saveMusic } from '@/services/music';
+import { deleteMusic, findMusic, getMusicAll, saveMusic, updateMusic } from '@/services/music';
 
 export default {
   namespace: 'music',
@@ -22,6 +22,11 @@ export default {
       console.log(payload, 'payload');
 
       const { data } = yield call(deleteMusic, payload);
+      yield put({ type: 'save', payload: { data } });
+    },
+    *updateMusic({ payload }: any, { call, put }: any): any {
+      console.log(payload);
+      const { data } = yield call(updateMusic, payload);
       yield put({ type: 'save', payload: { data } });
     },
   },
