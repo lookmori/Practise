@@ -1,9 +1,10 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { ModalForm, ProColumns, ProFormDatePicker, ProFormText } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, message } from 'antd';
+import { Button, message, Modal } from 'antd';
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
+const { confirm } = Modal;
 const TableList: React.FC = connect(({ music }: any) => ({ music }))(function ({
   dispatch,
   music: { list },
@@ -86,17 +87,25 @@ const TableList: React.FC = connect(({ music }: any) => ({ music }))(function ({
       author: values.musicAuthor,
       date: values.musicPublishDate,
     };
-    console.log(body, 'body');
-
     type == 1
       ? dispatch({ type: 'music/saveMusic', payload: body })
       : dispatch({ type: 'music/updateMusic', payload: body });
   };
 
   const deleteMusic = async (id: string) => {
-    dispatch({
-      type: 'music/deleteMusic',
-      payload: id,
+    confirm({
+      title: '确定删除吗？',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: () => {
+        dispatch({
+          type: 'music/deleteMusic',
+          payload: id,
+        });
+      },
+      onCancel: () => {
+        return true;
+      },
     });
   };
 
@@ -104,6 +113,7 @@ const TableList: React.FC = connect(({ music }: any) => ({ music }))(function ({
     <PageContainer>
       <ProTable
         options={false}
+        rowKey="id"
         search={false}
         toolBarRender={() => [
           <ModalForm<{

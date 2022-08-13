@@ -14,20 +14,26 @@
     ],
   },
   {
-    path: '/music',
+    path: '/musics',
     name: '音乐',
-    icon: 'smile',
+    icon: 'icon-music1',
     component: './music',
   },
   {
-    path: '/movie',
+    path: '/movies',
     name: '电影',
-    icon: 'smile',
+    icon: 'icon-movie',
     component: './movie',
   },
   {
+    path: '/books',
+    name: '书籍',
+    icon: 'icon-book',
+    component: './book',
+  },
+  {
     path: '/',
-    redirect: '/music',
+    redirect: '/musics',
   },
   {
     component: './404',

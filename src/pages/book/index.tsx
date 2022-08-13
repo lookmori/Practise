@@ -5,29 +5,29 @@ import { Button, Modal } from 'antd';
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
 const { confirm } = Modal;
-const TableList: React.FC = connect(({ movie }: any) => ({ movie }))(function ({
+const TableList: React.FC = connect(({ book }: any) => ({ book }))(function ({
   dispatch,
-  movie: { movie },
+  book: { books },
 }: any) {
   useEffect(() => {
     dispatch({
-      type: 'movie/getMovieList',
+      type: 'book/getBookList',
       payload: {},
     });
   }, []);
   const columns: ProColumns<API.RuleListItem>[] = [
     {
-      title: '电影名',
+      title: '书名',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '导演',
+      title: '作者',
       dataIndex: 'author',
       key: 'author',
     },
     {
-      title: '发布日期',
+      title: '出版日期',
       dataIndex: 'date',
       key: 'date',
     },
@@ -52,11 +52,11 @@ const TableList: React.FC = connect(({ movie }: any) => ({ movie }))(function ({
   //添加
   const addMovie = async (values: any) => {
     const body = {
-      name: values.movieName,
-      author: values.movieAuthor,
-      date: values.moviePublishDate,
+      name: values.bookName,
+      author: values.bookAuthor,
+      date: values.bookPublishDate,
     };
-    dispatch({ type: 'movie/saveMovies', payload: body });
+    dispatch({ type: 'book/addBookOne', payload: body });
   };
 
   // 删除
@@ -67,7 +67,7 @@ const TableList: React.FC = connect(({ movie }: any) => ({ movie }))(function ({
       cancelText: '取消',
       onOk: () => {
         dispatch({
-          type: 'movie/deleteMovie',
+          type: 'book/deleteBookOne',
           payload: id,
         });
       },
@@ -83,17 +83,18 @@ const TableList: React.FC = connect(({ movie }: any) => ({ movie }))(function ({
         options={false}
         rowKey="id"
         search={false}
+        locale={{ emptyText: () => `暂无数据` }}
         toolBarRender={() => [
           <ModalForm<{
-            movieName: string;
-            movieAuthor: string;
-            moviePublishDate: Date;
+            bookName: string;
+            bookAuthor: string;
+            bookPublishDate: Date;
           }>
-            title="新增电影"
+            title="添加图书"
             trigger={
               <Button type="primary">
                 <PlusOutlined />
-                新增电影
+                添加图书
               </Button>
             }
             autoFocusFirstInput
@@ -106,12 +107,12 @@ const TableList: React.FC = connect(({ movie }: any) => ({ movie }))(function ({
               return true;
             }}
           >
-            <ProFormText width="md" name="movieName" label="电影名称" />
-            <ProFormText width="md" name="movieAuthor" label="导演" />
-            <ProFormDatePicker width="md" name="moviePublishDate" label="电影发行时间" />
+            <ProFormText width="md" name="bookName" label="图书名称" />
+            <ProFormText width="md" name="bookAuthor" label="作者" />
+            <ProFormDatePicker width="md" name="bookPublishDate" label="出版日期" />
           </ModalForm>,
         ]}
-        dataSource={movie}
+        dataSource={books}
         columns={columns}
       />
     </PageContainer>
