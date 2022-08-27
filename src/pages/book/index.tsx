@@ -5,6 +5,8 @@ import { Button, Modal } from 'antd';
 import React, { useEffect } from 'react';
 import { connect } from 'umi';
 const { confirm } = Modal;
+const abort = new AbortController();
+const { signal } = abort;
 const TableList: React.FC = connect(({ book }: any) => ({ book }))(function ({
   dispatch,
   book: { books },
@@ -14,6 +16,14 @@ const TableList: React.FC = connect(({ book }: any) => ({ book }))(function ({
       type: 'book/getBookList',
       payload: {},
     });
+    return () => {
+      console.log('123');
+
+      dispatch({
+        type: 'book/remove',
+        payload: {},
+      });
+    };
   }, []);
   const columns: ProColumns<API.RuleListItem>[] = [
     {
