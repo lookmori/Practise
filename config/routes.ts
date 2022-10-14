@@ -32,6 +32,12 @@
     component: './book',
   },
   {
+    path: '/canvas',
+    name: '签字板',
+    icon: 'icon-book',
+    component: './canvas',
+  },
+  {
     path: '/',
     redirect: '/musics',
   },
